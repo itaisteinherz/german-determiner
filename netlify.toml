@@ -1,4 +1,4 @@
 [build]
 	functions = "functions-build"
-	command = "yarn build"
+	command = "npm run build"
 	publish = "build"
