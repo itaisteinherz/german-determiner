@@ -16,31 +16,18 @@ const determiner = gender => {
 	}
 };
 
-const lookup = async word => {
-	if (!word) {
-		return "";
-	}
-
-	const res = await ky(`https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20190531T143403Z.ac28ff8b168763ef.b572c482ad697ee771956ca98ba4d15f00e8dd22&lang=de-en&text=${word}`).json();
-
-	let gender = "";
-	let translation = "";
-	
-	try {
-		gender = res.def[0].gen;
-		translation = res.def[0].tr[0].text;
-	} catch (error) {}
-
-	return {gender, translation};
-};
-
-
 function App() {
 	const [word, setWord] = useState("wasser");
 	const [det, setDet] = useState("das");
 	const [translation, setTranslation] = useState("water");
 
-	const getInfo = useCallback(pDebounce(lookup, 300), [])
+	const getInfo = useCallback(pDebounce(word => {
+		if (!word) {
+			return "";
+		}
+	
+		return ky(`/.netlify/functions/lookup?word=${word}`).json();
+	}, 300), [])
 
 	const onChange = async event => {
 		const {value} = event.target;
