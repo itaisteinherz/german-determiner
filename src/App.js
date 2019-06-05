@@ -21,13 +21,13 @@ function App() {
 	const [det, setDet] = useState("das");
 	const [translation, setTranslation] = useState("water");
 
-	const getInfo = useCallback(pDebounce(async word => {
+	const getInfo = pDebounce(async word => {
 		if (!word) {
 			return {gender: "", translation: ""};
 		}
 	
 		return ky(`/.netlify/functions/lookup?word=${word}`).json();
-	}, 300), [])
+	}, 300);
 
 	const onChange = async event => {
 		const {value} = event.target;
