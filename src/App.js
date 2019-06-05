@@ -21,9 +21,9 @@ function App() {
 	const [det, setDet] = useState("das");
 	const [translation, setTranslation] = useState("water");
 
-	const getInfo = useCallback(pDebounce(word => {
+	const getInfo = useCallback(pDebounce(async word => {
 		if (!word) {
-			return "";
+			return {gender: "", translation: ""};
 		}
 	
 		return ky(`/.netlify/functions/lookup?word=${word}`).json();
@@ -32,8 +32,15 @@ function App() {
 	const onChange = async event => {
 		const {value} = event.target;
 		setWord(value);
-		
-		const {gender, translation} = await getInfo(value);
+
+		const info = {gender: "", translation: ""};
+
+		try {
+			Object.assign(info, await getInfo(value));
+		} catch (error) {}
+
+		const {gender, translation} = info;
+
 		setDet(determiner(gender));
 		setTranslation(translation);
 	};

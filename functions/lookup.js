@@ -13,6 +13,10 @@ exports.handler = async (event, context, callback) => {
 	try {
 		const {body} = await got(`https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=${process.env.YANDEX_API_KEY}&lang=de-en&text=${word}`, {json: true});
 
+		if (body.def[0].pos !== "noun") {
+			throw new Error("Given word should be a noun");
+		}
+
 		const gender = body.def[0].gen;
 		const translation = body.def[0].tr[0].text;
 
