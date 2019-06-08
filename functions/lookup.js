@@ -7,7 +7,7 @@ exports.handler = async (event, context, callback) => {
 		return "";
 	}
 
-	let res = {};
+	let result = {};
 	let fetchError = null;
 
 	try {
@@ -20,18 +20,16 @@ exports.handler = async (event, context, callback) => {
 		const gender = body.def[0].gen;
 		const translation = body.def[0].tr[0].text;
 
-		res = {gender, translation};
+		result = {gender, translation};
 	} catch (error) {
 		fetchError = error;
 	}
 
-	console.log({
+	const response = {
 		statusCode: fetchError ? 500 : 200,
-		body: fetchError ? fetchError.message : JSON.stringify(res)
-	});
+		body: fetchError ? fetchError.message : JSON.stringify(result)
+	};
 
-	return {
-		statusCode: fetchError ? 500 : 200,
-		body: fetchError ? fetchError.message : JSON.stringify(res)
-	};	
+	console.log(`Time: ${new Date()}, response:`, response);
+	return response;
 };

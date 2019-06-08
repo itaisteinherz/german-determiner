@@ -1,9 +1,9 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState} from 'react';
 import ky from 'ky';
 import pDebounce from 'p-debounce';
 import './App.css';
 
-const determiner = gender => {
+const getDeterminer = gender => {
 	switch(gender) {
 		case "n":
 			return "das";
@@ -16,32 +16,32 @@ const determiner = gender => {
 	}
 };
 
+const getInfo = pDebounce(async word => {
+	if (!word) {
+		return {gender: "", translation: ""};
+	}
+
+	return ky(`/.netlify/functions/lookup?word=${word}`).json();
+}, 300);
+
 function App() {
 	const [word, setWord] = useState("wasser");
 	const [det, setDet] = useState("das");
 	const [translation, setTranslation] = useState("water");
 
-	const getInfo = pDebounce(async word => {
-		if (!word) {
-			return {gender: "", translation: ""};
-		}
-	
-		return ky(`/.netlify/functions/lookup?word=${word}`).json();
-	}, 300);
-
 	const onChange = async event => {
 		const {value} = event.target;
 		setWord(value);
 
-		const info = {gender: "", translation: ""};
+		let info = {gender: "", translation: ""};
 
 		try {
-			Object.assign(info, await getInfo(value));
+			info = await getInfo(value);
 		} catch (error) {}
 
 		const {gender, translation} = info;
 
-		setDet(determiner(gender));
+		setDet(getDeterminer(gender));
 		setTranslation(translation);
 	};
 
