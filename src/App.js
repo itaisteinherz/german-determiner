@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import AutosizeInput from 'react-input-autosize';
-import ky from 'ky';
-import pDebounce from 'p-debounce';
-import './App.css';
+import React, {useState} from "react";
+import AutosizeInput from "react-input-autosize";
+import ky from "ky";
+import pDebounce from "p-debounce";
+import "./App.css"; // eslint-disable-line import/no-unassigned-import
 
 const getDeterminer = gender => {
-	switch(gender) {
+	switch (gender) {
 		case "n":
 			return "das";
 		case "f":

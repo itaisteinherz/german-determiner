@@ -1,6 +1,6 @@
 const got = require("got");
 
-exports.handler = async (event, context, callback) => {
+exports.handler = async (event, context) => { // eslint-disable-line no-unused-vars
 	const {word} = event.queryStringParameters;
 
 	if (!word) {
