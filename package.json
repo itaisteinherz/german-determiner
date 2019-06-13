@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "Get the determiner and translation of any noun in German",
 	"license": "MIT",
-	"repository": "itaisteinherz/german-identifier",
+	"repository": "itaisteinherz/german-determiner",
 	"author": {
 		"name": "Itai Steinherz",
 		"email": "itaisteinherz@gmail.com",
