@@ -1,0 +1,67 @@
+/* Main variables */
+:root {
+	--background-color: #383838;
+	--text-color: white;
+	--placeholder-color: gray;
+	--main-font-size: 10vw;
+	--secondary-font-size: 7vw;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	line-height: normal;
+}
+
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--background-color);
+	color: var(--text-color);
+}
+
+.app {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10%;
+}
+
+.input-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.word {
+	font-size: var(--main-font-size);
+}
+
+.word > input {
+	outline: none;
+	border: none;
+	background-color: var(--background-color);
+	color: var(--text-color);
+}
+
+.word > input::placeholder {
+	color: var(--placeholder-color);
+}
+
+.determiner {
+	margin-right: 2vw;
+	font-size: var(--main-font-size);
+}
+
+.translation {
+	margin-top: 1vw;
+	font-size: var(--secondary-font-size);
+}
+
+/* Display placeholder text */
+.determiner:empty:before, .translation:empty:before {
+	content: attr(placeholder);
+	color: var(--placeholder-color);
+}

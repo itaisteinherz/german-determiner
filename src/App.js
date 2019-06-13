@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import AutosizeInput from 'react-input-autosize';
 import ky from 'ky';
 import pDebounce from 'p-debounce';
 import './App.css';
@@ -25,9 +26,13 @@ const getInfo = pDebounce(async word => {
 }, 300);
 
 function App() {
-	const [word, setWord] = useState("wasser");
-	const [det, setDet] = useState("das");
-	const [translation, setTranslation] = useState("water");
+	const placeholderWord = "wasser";
+	const placeholderDet = "das";
+	const placeholderTranslation = "water";
+
+	const [word, setWord] = useState("");
+	const [det, setDet] = useState("");
+	const [translation, setTranslation] = useState("");
 
 	const onChange = async event => {
 		const {value} = event.target;
@@ -46,10 +51,12 @@ function App() {
 	};
 
 	return (
-		<div className="App">
-			<p>{det}</p>
-			<input type="text" value={word} onChange={onChange}/>
-			<p>{translation}</p>
+		<div className="app">
+			<div className="input-row">
+				<p className="determiner" placeholder={placeholderDet}>{det}</p>
+				<AutosizeInput className="word" placeholder={placeholderWord} value={word} onChange={onChange}/>
+			</div>
+			<p className="translation" placeholder={placeholderTranslation}>{translation}</p>
 		</div>
 	);
 }
