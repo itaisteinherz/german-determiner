@@ -1,6 +1,7 @@
 {
 	"name": "german-determiner",
 	"version": "1.0.0",
+	"private": true,
 	"description": "Get the determiner and translation of any noun in German",
 	"license": "MIT",
 	"repository": "itaisteinherz/german-determiner",
