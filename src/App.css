@@ -35,14 +35,11 @@ body {
 	flex-direction: row;
 }
 
-.word {
-	font-size: var(--main-font-size);
-}
-
 .word > input {
 	outline: none;
 	border: none;
 	height: 100%;
+	font-size: var(--main-font-size);
 	background-color: var(--background-color);
 	color: var(--text-color);
 }
