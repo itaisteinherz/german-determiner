@@ -54,9 +54,18 @@ function App() {
 		<div className="app">
 			<div className="input-row">
 				<p className="determiner" placeholder={placeholderDet}>{det}</p>
-				<AutosizeInput className="word" placeholder={placeholderWord} value={word} onChange={onChange}/>
+				<AutosizeInput className="word" autocorrect="off" autocomplete="off" placeholder={placeholderWord} value={word} onChange={onChange}/>
 			</div>
 			<p className="translation" placeholder={placeholderTranslation}>{translation}</p>
+			<p className="credits">
+				&copy; Itai Steinherz, 2019
+				<br/> {/* eslint-disable-line react/jsx-child-element-spacing */}
+				Powered by
+				{" "}
+				<a href="https://tech.yandex.com/translate" target="_blank" rel="noopener noreferrer">
+					Yandex Translate API
+				</a>
+			</p>
 		</div>
 	);
 }
